@@ -36,7 +36,7 @@ router.get('/', function (req, res) {
     res.send('Hello World');
  })
 
- router.post('/ticket/car', function (req, res) {
+ router.post('/car', function (req, res) {
     var cptchid = req.body.cptchid;
     var captcha = req.body.captcha;
     var BAR_KD = req.body.BAR_KD;
@@ -72,10 +72,15 @@ router.get('/', function (req, res) {
                     message="شما دارای خلافی های زیر هستید";
                     payload= arrays;
                 }else{
-                    patt = new RegExp("access deny");
-                    if(patt.exec(response.data)){
-                    status = 0;
-                    message = "اطلاعات وارد شده صحیح نیست، لطفا مجددا امتحان نمایدد";
+                    var patt = new RegExp("deny");
+                    var vpn = new RegExp("خارج از کشور");
+                    // console.log((response.data));
+                    var no_ticket = patt.exec(response.data);
+                    var vpn_ticket = vpn.exec(response.data);
+                    if(no_ticket || vpn_ticket){
+                        message  = (no_ticket) ? "اطلاعات وارد شده صحیح نیست، لطفا مجددا امتحان نمایدد" : "یرای استفاده از سامانه راهور باید از آپی ایران متصل شوید";
+                        status = 0;
+                        // message = "اطلاعات وارد شده صحیح نیست، لطفا مجددا امتحان نمایدد";
                     }else{
                         status = 1;
                         message = "تا کنون مودرد خلافی برای شما گزارش داده نشده است";
@@ -84,7 +89,7 @@ router.get('/', function (req, res) {
                 }
             }
             
-            console.log("//// count : ////");
+            // console.log("//// count : ////");
             // console.log(CBCount);
             res.setHeader('Content-Type', 'application/json');
             res.send( JSON.stringify({status:status, message:message,payload:payload}) );

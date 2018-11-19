@@ -1,6 +1,6 @@
 
 var express = require('express');
-var router = require('./routes/rahvar');
+var router = require('./routes/ticket');
 var app = express();
 var app = express()
 var bodyParser = require('body-parser')
@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use("/rahvar",router);
+app.use("/rahvar/ticket/",router);
 
 
 
