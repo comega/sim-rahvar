@@ -1,6 +1,7 @@
 
 var express = require('express');
 var router = require('./routes/ticket');
+var health = require('./middleware/health');
 var app = express();
 var app = express()
 var bodyParser = require('body-parser')
@@ -10,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
+app.use(health)
 
 app.use("/rahvar/ticket/",router);
 
