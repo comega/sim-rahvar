@@ -9,12 +9,12 @@ module.exports = function(req,res,next) {
     if(app_status != 1){
         res.setHeader('Content-Type', 'application/json');
         res.status(400);
-        res.send(JSON.stringify({"image":"سرویس در حال بروز رسانی است"}));
+        res.send(JSON.stringify({"message":"سرویس در حال بروز رسانی است"}));
     }
     else if( app_min > user_app_version){
         res.setHeader('Content-Type', 'application/json');
         res.status(400);
-        res.send(JSON.stringify({"image":"برای استفاده از این سرویس سیم سوت خود را آپدیت نمایدد"}));
+        res.send(JSON.stringify({"message":"برای استفاده از این سرویس سیم سوت خود را آپدیت نمایدد"}));
     }else{
         next();
     }
