@@ -54,7 +54,7 @@ router.get('/', function (req, res) {
             }else{
                 var $  = cheerio.load(response.data);
                 var CBCount = $('#t1 input[type=checkbox]').length;
-                if(CBCount > 1){
+                if(CBCount > 0){
                     var data = $('tbody tr td');
                     // console.log( Object.values(data) );
                     var allData = []; 
